@@ -9,7 +9,6 @@ export default async function handler(
   }
 
   const { lat, lon } = req.query;
-  console.log("Requisição recebida - Lat:", lat, "Lon:", lon);
 
   if (!lat || !lon) {
     console.error("Erro: Coordenadas não foram passadas corretamente.");
@@ -17,8 +16,6 @@ export default async function handler(
   }
 
   try {
-    console.log("Fazendo requisição para OpenWeatherMap...");
-
     const apiKey = process.env.NEXT_PUBLIC_API_SECRET;
     if (!apiKey) {
       console.error("Erro: API_SECRET não está definida!");
@@ -28,10 +25,8 @@ export default async function handler(
     }
 
     const response = await fetch(
-      `https://api.openweaaathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
     );
-
-    console.log("Resposta da API:", response.status);
 
     if (!response.ok) {
       throw new Error(
