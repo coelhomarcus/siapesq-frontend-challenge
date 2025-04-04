@@ -16,6 +16,7 @@ import Error from "../components/Error/Error";
 import { FaWind } from "react-icons/fa6";
 import { IoRainySharp } from "react-icons/io5";
 import { RiDropFill } from "react-icons/ri";
+import { IoIosArrowDropdown } from "react-icons/io";
 
 //Coordenadas de teste
 const city = [
@@ -137,7 +138,9 @@ const Page = () => {
       <div className="relative *:text-center w-full px-5 space-y-5 my-10 md:w-[650px]">
         <Menu>
           <MenuButton className="text-white text-center w-full cursor-pointer">
-            {data.name}
+            <div className="flex items-center justify-center gap-2">
+              {data.name} <IoIosArrowDropdown />
+            </div>
           </MenuButton>
           <MenuItems
             anchor="bottom"
