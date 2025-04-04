@@ -25,6 +25,7 @@ const city = [
   { name: "Tokyo", lat: 35.6895, lon: 139.6917 },
   { name: "Buenos Aires", lat: -34.6037, lon: -58.3816 },
   { name: "Paris", lat: 48.8566, lon: 2.3522 },
+  { name: "London", lat: 51.5074, lon: -0.1278 },
 ];
 
 const getNextFiveDays = () => {
@@ -114,10 +115,10 @@ const Page = () => {
         break;
       case "Atmosphere":
       case "Clear":
-        setBg("sun.png");
+        setBg("clear.png");
         break;
       default:
-        setBg("clear.png");
+        setBg("sun.png");
     }
   }, [data]);
 
