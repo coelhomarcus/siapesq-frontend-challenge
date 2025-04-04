@@ -10,7 +10,7 @@ import QuickInfo from "../components/QuickInfo/QuickInfo";
 import Loading from "../components/Loading/Loading";
 import Error from "../components/Error/Error";
 
-//Icones
+//Icons
 import { FaWind } from "react-icons/fa6";
 import { IoRainySharp } from "react-icons/io5";
 import { RiDropFill } from "react-icons/ri";
