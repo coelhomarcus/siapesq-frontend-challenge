@@ -1,5 +1,7 @@
 "use client";
 
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+
 import React from "react";
 import { WeatherData, WeatherApiResponse } from "../types/weather";
 import Image from "next/image";
@@ -17,12 +19,12 @@ import { RiDropFill } from "react-icons/ri";
 
 //Coordenadas de teste
 const city = [
-  { name: "Marabá - Pará", lat: -5.3806, lon: -49.1325 },
-  { name: "New York", lat: 40.73061, lon: -73.935242 },
+  { name: "Marabá", lat: -5.3806, lon: -49.1325 },
   { name: "São Paulo", lat: -23.5505, lon: -46.6333 },
-  { name: "Buenos Aires, Argentina", lat: -34.6037, lon: -58.3816 },
-  { name: "Paris, França", lat: 48.8566, lon: 2.3522 },
-  { name: "Tóquio, Japão", lat: 35.6895, lon: 139.6917 },
+  { name: "New York", lat: 40.73061, lon: -73.935242 },
+  { name: "Tokyo", lat: 35.6895, lon: 139.6917 },
+  { name: "Buenos Aires", lat: -34.6037, lon: -58.3816 },
+  { name: "Paris", lat: 48.8566, lon: 2.3522 },
 ];
 
 const getNextFiveDays = () => {
@@ -43,8 +45,8 @@ const Page = () => {
   const [bg, setBg] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
 
-  const index = 0;
-  const selectedCity = React.useMemo(() => city[index], []);
+  const [index, setIndex] = React.useState(0);
+  const selectedCity = React.useMemo(() => city[index], [index]);
 
   React.useEffect(() => {
     if (!selectedCity) return;
@@ -132,7 +134,30 @@ const Page = () => {
       />
 
       <div className="relative *:text-center w-full px-5 space-y-5 my-10 md:w-[650px]">
-        <p className="text-white">{data.name}</p>
+        <Menu>
+          <MenuButton className="text-white text-center w-full cursor-pointer">
+            {data.name}
+          </MenuButton>
+          <MenuItems
+            anchor="bottom"
+            className="px-15 py-5 bg-black/40 backdrop-blur-lg border border-white/30 space-y-5 rounded-2xl *:cursor-pointer *:text-white grid justify-center"
+          >
+            {city.map((item, index) => {
+              return (
+                <MenuItem key={item.name}>
+                  <button
+                    className="block"
+                    onClick={() => {
+                      setIndex(index);
+                    }}
+                  >
+                    {item.name}
+                  </button>
+                </MenuItem>
+              );
+            })}
+          </MenuItems>
+        </Menu>
         <h1 className=" text-white text-9xl font-bold">
           {data.main.temp.toFixed()}
         </h1>
