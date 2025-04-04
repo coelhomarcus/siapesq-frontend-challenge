@@ -1,11 +1,14 @@
 "use client";
 
 import React from "react";
+import { WeatherData, WeatherApiResponse } from "../types/weather";
+import Image from "next/image";
+
+//Components
 import Day from "../components/Day/Day";
 import QuickInfo from "../components/QuickInfo/QuickInfo";
 import Loading from "../components/Loading/Loading";
-import { WeatherData, WeatherApiResponse } from "../types/weather";
-import Image from "next/image";
+import Error from "../components/Error/Error";
 
 //Icones
 import { FaWind } from "react-icons/fa6";
@@ -22,10 +25,23 @@ const city = [
   { name: "Tóquio, Japão", lat: 35.6895, lon: 139.6917 },
 ];
 
+const getNextFiveDays = () => {
+  const formatter = new Intl.DateTimeFormat("en", { weekday: "long" });
+
+  return Array.from({ length: 5 }, (_, i) => {
+    const date = new Date();
+    date.setDate(date.getDate() + i);
+    return formatter.format(date);
+  });
+};
+
+const week = getNextFiveDays();
+
 const Page = () => {
   const [data, setData] = React.useState<WeatherApiResponse>();
   const [dataPrev, setDataPrev] = React.useState<WeatherData>();
   const [bg, setBg] = React.useState("");
+  const [error, setError] = React.useState<string | null>(null);
 
   const index = 0;
   const selectedCity = React.useMemo(() => city[index], []);
@@ -34,34 +50,44 @@ const Page = () => {
     if (!selectedCity) return;
     const { lat, lon } = selectedCity;
 
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_API_SECRET}&units=metric`
-    )
-      .then((j) => j.json())
-      .then((b) => {
-        setData(b);
-      });
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
 
-    fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_API_SECRET}&units=metric`
-    )
-      .then((j) => j.json())
-      .then((b) => {
-        setDataPrev(b);
-      });
+        if (!response.ok) {
+          throw new globalThis.Error(`Erro na requisição: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        setData(result);
+      } catch {
+        setError("Erro ao buscar dados. Tente novamente mais tarde.");
+      }
+    };
+
+    fetchData();
   }, [selectedCity]);
 
-  const getNextFiveDays = () => {
-    const formatter = new Intl.DateTimeFormat("en", { weekday: "long" });
+  React.useEffect(() => {
+    if (!selectedCity) return;
+    const { lat, lon } = selectedCity;
 
-    return Array.from({ length: 5 }, (_, i) => {
-      const date = new Date();
-      date.setDate(date.getDate() + i);
-      return formatter.format(date);
-    });
-  };
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/weatherPrev?lat=${lat}&lon=${lon}`);
+        if (!response.ok) {
+          throw new globalThis.Error(`Erro na requisição: ${response.status}`);
+        }
+        const result = await response.json();
+        setDataPrev(result);
+      } catch {
+        setError("Erro ao buscar dados. Tente novamente mais tarde.");
+      }
+    };
 
-  const Week = getNextFiveDays();
+    fetchData();
+  }, [selectedCity]);
 
   React.useEffect(() => {
     if (!data) return;
@@ -93,9 +119,10 @@ const Page = () => {
     }
   }, [data]);
 
-  return data && dataPrev ? (
+  return error ? (
+    <Error />
+  ) : data && dataPrev ? (
     <div className="relative w-full min-h-screen bg-black flex flex-col items-center">
-      {/* Wallpaper */}
       <Image
         src={`/bg/${bg}`}
         alt="Background"
@@ -104,7 +131,6 @@ const Page = () => {
         className="bg-cover bg-center bg-no-repeat blur-sm opacity-50"
       />
 
-      {/* Conteúdo principal */}
       <div className="relative *:text-center w-full px-5 space-y-5 my-10 md:w-[650px]">
         <p className="text-white">{data.name}</p>
         <h1 className=" text-white text-9xl font-bold">
@@ -124,27 +150,27 @@ const Page = () => {
         <div className="p-5 bg-white/20 backdrop-blur-sm border border-white/30 text-white w-full rounded-2xl">
           <div className="grid space-y-5 *:flex *:justify-between">
             <Day
-              day={Week[0]}
+              day={week[0]}
               temp={dataPrev.list[0].main.temp}
               rain={dataPrev.list[0].pop * 100 + "%"}
             />
             <Day
-              day={Week[1]}
+              day={week[1]}
               temp={dataPrev.list[8].main.temp}
               rain={dataPrev.list[8].pop * 100 + "%"}
             />
             <Day
-              day={Week[2]}
+              day={week[2]}
               temp={dataPrev.list[16].main.temp}
               rain={dataPrev.list[16].pop * 100 + "%"}
             />
             <Day
-              day={Week[3]}
+              day={week[3]}
               temp={dataPrev.list[24].main.temp}
               rain={dataPrev.list[24].pop * 100 + "%"}
             />
             <Day
-              day={Week[4]}
+              day={week[4]}
               temp={dataPrev.list[32].main.temp}
               rain={dataPrev.list[32].pop * 100 + "%"}
             />
