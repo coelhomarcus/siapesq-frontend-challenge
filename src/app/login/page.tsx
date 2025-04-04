@@ -14,6 +14,7 @@ const Entrar = () => {
         alt="Logo"
         width={128}
         height={128}
+        priority
       />
       <Intro title="Hello Again!" />
       <Input type="email" placeholder="Email" className="md:w-[450px]" />

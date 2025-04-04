@@ -11,6 +11,7 @@ const Loading = () => {
           height={100}
           className="mx-auto"
           alt="Logo"
+          priority
         />
       </div>
       <div className="flex flex-col w-full h-[80vh] items-center justify-center gap-5">

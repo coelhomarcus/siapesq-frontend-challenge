@@ -17,6 +17,7 @@ export default function Home() {
         alt="Logo"
         width={128}
         height={128}
+        priority
       />
       <Intro title="Lets Go!" />
       <Input type="text" placeholder="Name" className="md:w-[450px]" />
