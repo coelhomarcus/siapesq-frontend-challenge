@@ -140,13 +140,13 @@ const Page = () => {
           </MenuButton>
           <MenuItems
             anchor="bottom"
-            className="px-15 py-5 bg-black/40 backdrop-blur-lg border border-white/30 space-y-5 rounded-2xl *:cursor-pointer *:text-white grid justify-center"
+            className="mt-3 px-15 py-5 bg-black/40 backdrop-blur-lg border border-white/30 space-y-5 rounded-2xl *:cursor-pointer *:text-white grid justify-center"
           >
             {city.map((item, index) => {
               return (
                 <MenuItem key={item.name}>
                   <button
-                    className="block"
+                    className="block hover:underline"
                     onClick={() => {
                       setIndex(index);
                     }}
