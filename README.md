@@ -1,47 +1,33 @@
-<div align="center">  
-  <img src="https://github.com/user-attachments/assets/2acc5cab-7ec9-4cc6-a3fc-1fe80eceee73" alt="logo" style="width:100px"></img>
-</div>
+# Blob
 
-## Desafio Estagiarios Frontend
+Um site para visualizar a temperatura de uma cidade.
 
-## Desafio: Construção de uma Aplicação Interativa com React e Next.js
-## Objetivo:
+## Tecnologias Utilizadas
 
-Desenvolver uma aplicação web utilizando React, Next.js, Tailwind CSS e TypeScript, focando na criação de telas responsivas, dinâmicas e intuitivas, aplicando conceitos de UI/UX.
-## Requisitos:
+- `Next.js`
+- `Tailwind CSS`
+- Consumo de API
 
-Criar pelo menos quatro telas:
-Tela de login - Uma página de login
+## Telas
 
-Tela de registro - Uma página com form para criar usuário
+- **Login**: `/login`
+- **Cadastro**: `/register`
+- **Tela Principal**: `/`
+- **Erro**: `/` (exibida em caso de erro na requisição)
 
-Tela inicial – Uma página de apresentação com um breve resumo sobre o conteúdo da aplicação.
+## Navegação
 
-Tela de informações – Exibe dados obtidos de uma API externa (exemplos: GBIF API, PokéAPI, ou outra de sua escolha).
+Por padrão, o site inicia na **Tela Principal** (`/`).  
+Caso queira acessar a tela de **Login** ou **Cadastro**, utilize as URLs `/login` ou `/register`.
 
-Implementar navegação entre as páginas utilizando Next.js.
+Se quiser visualizar a tela de erro, acesse `/error`. Essa URL foi criada apenas para demonstração.
 
-Garantir que a aplicação seja responsiva e tenha um design intuitivo.
+> **Observação:** As telas de Login e Cadastro não estão conectadas a um backend. Basta clicar em **"Login"** ou **"Sign Up"** que você será redirecionado automaticamente para a **Tela Principal**.
 
-Utilizar boas práticas de organização de código e componentes.
+## Configuração
 
-## Adicional opcional
-Desenvolver as rotas de login e registro e realizar a integração com as telas
+> Altere o arquivo de ambiente:
 
-- Pode usar o next como backend ou implementar separado, sua decisão
-  
-## O que será avaliado:
-✅ Habilidade em criar telas responsivas e intuitivas 🖥️📱
-✅ Uso correto da navegação entre páginas no Next.js 🔄
-✅ Organização do código e estrutura do projeto 📂
-✅ Criatividade e design das telas 🎨
-
-## Dicas para se destacar:
-Capriche na experiência do usuário, garantindo uma navegação fluida e acessível.
-
-Pense no design das telas para criar uma identidade visual coerente e atraente.
-
-Otimize o carregamento dos dados da API para melhorar a performance.
-
-Utilize animações e interações sutis para tornar a interface mais envolvente.
-    
+```sh
+.env.test → .env.development
+```
