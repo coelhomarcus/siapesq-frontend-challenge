@@ -181,27 +181,27 @@ const Page = () => {
             <Day
               day={week[0]}
               temp={dataPrev.list[0].main.temp}
-              rain={dataPrev.list[0].pop * 100 + "%"}
+              rain={(dataPrev.list[0].pop * 100).toFixed() + "%"}
             />
             <Day
               day={week[1]}
               temp={dataPrev.list[8].main.temp}
-              rain={dataPrev.list[8].pop * 100 + "%"}
+              rain={(dataPrev.list[8].pop * 100).toFixed() + "%"}
             />
             <Day
               day={week[2]}
               temp={dataPrev.list[16].main.temp}
-              rain={dataPrev.list[16].pop * 100 + "%"}
+              rain={(dataPrev.list[16].pop * 100).toFixed() + "%"}
             />
             <Day
               day={week[3]}
               temp={dataPrev.list[24].main.temp}
-              rain={dataPrev.list[24].pop * 100 + "%"}
+              rain={(dataPrev.list[24].pop * 100).toFixed() + "%"}
             />
             <Day
               day={week[4]}
               temp={dataPrev.list[32].main.temp}
-              rain={dataPrev.list[32].pop * 100 + "%"}
+              rain={(dataPrev.list[32].pop * 100).toFixed() + "%"}
             />
           </div>
         </div>
