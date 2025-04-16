@@ -1,6 +1,7 @@
 # Blob
 
 Um site para visualizar a temperatura de uma cidade.
+- Esse projeto foi feito para o Desafio Front-end da SIAPESQ
 
 ## Tecnologias Utilizadas
 
