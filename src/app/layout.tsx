@@ -13,6 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="shortcut icon" href="/blob.png" type="image/x-icon" />
       <body>{children}</body>
     </html>
   );
